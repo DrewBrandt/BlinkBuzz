@@ -32,5 +32,16 @@ void someOtherFunction() {
 	bb.onoff(BUZZER, 200, 5); // beep 5x, 200ms on, 200ms off
 	//OR
 	bb.onoff(BUZZER, 200); // beep 1x, 200ms on
+
+	//Can also simply hold the pin on/off:
+	bb.on(BUZZER); // turn on
+	bb.off(BUZZER); // turn off
+
+	//Finally, can clear a pin's queue (in async mode only):
+	bb.clearQueue(BUZZER);
+	//or can tell it to clear at set itself to a specific state:
+	bb.clearQueue(BUZZER, HIGH); // clear and set to HIGH
 }
 ```
+
+The code should be set up to run on a Windows machine or Arduino, although it has not actually been tested on an Arduino.
