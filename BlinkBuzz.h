@@ -10,7 +10,6 @@
 
 const uint64_t start = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 enum val { LOW, HIGH };
-enum mode { INPUT_, OUTPUT_ };
 inline uint64_t millis() { return (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() - start); }
 inline void digitalWrite(int pin, val value) {
 	printf("%.3f - %d to %s\n", millis()/ 1000.0, pin, value == LOW ? "LOW" : "HIGH");
@@ -18,7 +17,6 @@ inline void digitalWrite(int pin, val value) {
 inline void delay(uint64_t ms) {
 	Sleep(ms);
 }
-inline void pinMode(int pin, mode value) {}
 
 #else
 
