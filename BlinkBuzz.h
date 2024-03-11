@@ -31,15 +31,20 @@ class BlinkBuzz
 public:
 	BlinkBuzz(int* allowedPins, int numPins, bool enableAsync);
 	~BlinkBuzz();
+
 	void update(int curMS = -1);
+
 	void on(int pin);//turn on a pin
 	void off(int pin);//turn off a pin
+
 	void onoff(int pin, int duration);//turn on a pin for a ms duration
 	void onoff(int pin, int duration, int times);//turn on a pin for a ms duration, repeat times times with ms duration pause
 	void onoff(int pin, int duration, int times, int pause);//turn on a pin for a ms duration, repeat times times with ms pause pause
+	
 	void aonoff(int pin, int duration);//turn on a pin for a ms duration asynchronously
 	void aonoff(int pin, int duration, int times);//turn on a pin for a ms duration, repeat times times with ms duration pause asynchronously
 	void aonoff(int pin, int duration, int times, int pause);//turn on a pin for a ms duration, repeat times times with ms pause pause asynchronously
+	
 	void clearQueue(int pin);
 	void clearQueue(int pin, int resetTo);
 
