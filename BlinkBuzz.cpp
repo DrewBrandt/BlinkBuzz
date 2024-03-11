@@ -27,7 +27,11 @@ BlinkBuzz::BlinkBuzz(int* allowedPins, const int numPins, bool enableAsync)
 	for (int i = 0; i < numPins; i++)
 	{
 		pinState[i] = 0;
-		pinMode(allowedPins[i], OUTPUT_);
+#ifdef ARDUINO
+		pinMode(allowedPins[i], OUTPUT);
+#else
+		pinMode(allowedPins[i], OUTPUT_);//doesnt really do anything on non arduino lol
+#endif // ARDUINO
 	}
 }
 BlinkBuzz::~BlinkBuzz()
