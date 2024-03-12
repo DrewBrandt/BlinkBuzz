@@ -25,7 +25,6 @@ inline void delay(uint64_t ms) {
 #endif // !ARDUINO
 
 
-
 class BlinkBuzz
 {
 public:
@@ -69,5 +68,5 @@ private:
 	bool enableAsync;
 };
 
-
+extern BlinkBuzz bb;
 #endif // !BLINKBUZZH

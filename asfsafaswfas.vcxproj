@@ -24,6 +24,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlinkBuzz.h" />
+    <ClInclude Include="TestGlobal.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

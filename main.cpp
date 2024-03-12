@@ -3,8 +3,7 @@
 #include "BlinkBuzz.h"
 
 int pins[] = { 13, 33 };
-BlinkBuzz bb(pins, 2, true);
-
+BlinkBuzz bb = BlinkBuzz(pins, 2, true);
 void loop(int);
 
 int main()
