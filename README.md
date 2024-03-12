@@ -48,7 +48,7 @@ The code should be set up to run on a Windows machine or Arduino, although it ha
 
 For use on Windows for testing, you can compile the example code with:
 
-```bash
+```powershell
 g++ examples/main.cpp src/BlinkBuzz.cpp -o BlinkBuzz
 ```
 Assuming you have the MinGW compiler installed.
