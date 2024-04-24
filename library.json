@@ -1,0 +1,21 @@
+{
+  "name": "BlinkBuzz",
+  "version": "1.0.0",
+  "description": "Allows for Async pinout writing for specified durations/repetitions",
+  "keywords": "Blink, Buzz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DrewBrandt/BlinkBuzz.git"
+  },
+  "authors": [
+    {
+      "name": "Drew Brandt",
+      "url": "https://github.com/DrewBrandt",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/DrewBrandt/BlinkBuzz",
+  "frameworks": "arduino",
+  "platforms": "*"
+}

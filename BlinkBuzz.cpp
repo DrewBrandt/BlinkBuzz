@@ -2,6 +2,7 @@
 #include "BlinkBuzz.h"
 
 
+
 BlinkBuzz::BlinkBuzz(int* allowedPins, const int numPins, bool enableAsync)
 {
 	this->enableAsync = enableAsync;
