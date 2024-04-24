@@ -45,3 +45,10 @@ void someOtherFunction() {
 ```
 
 The code should be set up to run on a Windows machine or Arduino, although it has not actually been tested on an Arduino.
+
+For use on Windows for testing, you can compile the example code with:
+
+```powershell
+g++ examples/main.cpp src/BlinkBuzz.cpp -o BlinkBuzz
+```
+Assuming you have the MinGW compiler installed.
