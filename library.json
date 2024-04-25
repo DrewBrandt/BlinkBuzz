@@ -17,5 +17,8 @@
   "license": "MIT",
   "homepage": "https://github.com/DrewBrandt/BlinkBuzz",
   "frameworks": "arduino",
-  "platforms": "*"
+  "platforms": "*",
+  "build": {
+    "flags": "-Wno-unknown-pragmas"
+  }
 }
