@@ -1,6 +1,6 @@
 {
   "name": "BlinkBuzz",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Allows for Async pinout writing for specified durations/repetitions",
   "keywords": "Blink, Buzz",
   "repository": {
