@@ -9,9 +9,10 @@ Supports async patterns to prevent blocking `delay()` calls, if desired.
 ```c++
 #include <BlinkBuzz.h>
 
-#define BUZZER 33;
+const int BUZZER  = 33; // defined in the BlinkBuzz.h file for easy access across files
+const int LED = LED_BUILTIN;  // defined in the BlinkBuzz.h file for easy access across files
 
-int allowedPins[] = { LED_BUILTIN, BUZZER };
+int allowedPins[] = { LED, BUZZER };
 BlinkBuzz bb(allowedPins, 2, true);// allowed pins, number of pins, allow usage of async patterns
 
 void loop() {
