@@ -69,4 +69,6 @@ private:
 };
 
 extern BlinkBuzz bb;
+extern int BUZZER;
+extern int LED;
 #endif // !BLINKBUZZH
