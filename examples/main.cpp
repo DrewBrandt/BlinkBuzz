@@ -20,6 +20,8 @@ int main()
 void setup()
 {
 	bb.aonoff(13, 200, 3, 1000); // blink pin 13 3 times, 200ms on, 1000ms off asynchronously
+	bb.aonoff(13, 50, 3, 500);	 // blink pin 13 3 times, 50ms on, 500ms off asynchronously to demo queue adding
+	bb.aonoff(BUZZER, 2000);	 // demo queue overwriting
 }
 
 void loop(int start)
@@ -30,17 +32,17 @@ void loop(int start)
 	{
 		time = millis();
 		bb.update();
-		if (time - last > 100)
+		if (time - last >= 100)
 		{
 			last = time;
-			if (!passed1500 && time - start > 1500)
+			if (!passed1500 && time - start >= 1500)
 			{ // turn on pin 33 after 1.5 seconds, for 1 second
 				passed1500 = true;
-				bb.aonoff(BUZZER, 1000);
+				bb.aonoff(BUZZER, 1000, true);
 			}
 
 #ifndef ARDUINO
-			printf("%i.%03i between\n", time / 1000, time % 1000); // demonstrate asynchronous blinking
+			// printf("%i.%03i\n", time / 1000, time % 1000); // demonstrate asynchronous blinking
 #else
 			char buf[50];
 			snprintf(buf, 50, "%i.%03i between\n", time / 1000, time % 1000);
