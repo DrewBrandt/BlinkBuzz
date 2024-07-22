@@ -136,7 +136,7 @@ void BlinkBuzz::update(int curMS)
 		if (curMS >= pinQ[i][pinQStart[i]])
 		{
 			int next = (pinQStart[i] + 1) % MAX_QUEUE;
-			
+
 			if (next == pinQIndef[i]) // if indefinite pattern, reset the queue
 			{
 				indefhelper(i);
@@ -166,14 +166,13 @@ void BlinkBuzz::indefhelper(int idx)
 	pinQStart[idx] = (pinQStart[idx] - 2) % MAX_QUEUE; // reset start of queue 2 spaces back
 
 	int newTimeStamp = millis();
-	int intermediateQIdx = (pinQStart[idx] + 1) % MAX_QUEUE;					 // find the queue spot between the start and end
-	int oldOnDuration = pinQ[idx][intermediateQIdx] - pinQ[idx][pinQStart[idx]]; // find the duration
+	int intermediateQIdx = (pinQStart[idx] + 1) % MAX_QUEUE;										// find the queue spot between the start and end
+	int oldOnDuration = pinQ[idx][intermediateQIdx] - pinQ[idx][pinQStart[idx]];					// find the duration
 	int oldOffDuration = pinQ[idx][(pinQStart[idx] + 2) % MAX_QUEUE] - pinQ[idx][intermediateQIdx]; // find the other duration
 
-	pinQ[idx][pinQStart[idx]] = newTimeStamp;								 // reset start timestamp to now
-	pinQ[idx][intermediateQIdx] = newTimeStamp + oldOnDuration;				 // hold ON for the onDuration time
+	pinQ[idx][pinQStart[idx]] = newTimeStamp;													 // reset start timestamp to now
+	pinQ[idx][intermediateQIdx] = newTimeStamp + oldOnDuration;									 // hold ON for the onDuration time
 	pinQ[idx][(pinQStart[idx] + 2) % MAX_QUEUE] = newTimeStamp + oldOnDuration + oldOffDuration; // hold OFF for the offDuration time
-
 }
 
 void BlinkBuzz::aonoffhelper(int idx, int timeStamp)
