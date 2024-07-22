@@ -66,6 +66,11 @@ g++ examples/main.cpp src/BlinkBuzz.cpp -o BlinkBuzz
 ```
 Assuming you have the MinGW compiler installed.
 
+## TODO
+
+- Add support for more complex patterns
+- Refactor internal queue management system
+
 ## Changelog
 
 ### 1.2.0
