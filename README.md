@@ -16,44 +16,44 @@ int allowedPins[] = { LED, BUZZER };
 BlinkBuzz bb(allowedPins, 2, true);// allowed pins, number of pins, allow usage of async patterns
 
 void loop() {    // Must be called in the loop to update async pin states. Not required for non-async calls.
-	bb.update(); // The more frequently this is called, the more accurate the timing will be.
+    bb.update(); // The more frequently this is called, the more accurate the timing will be.
 }
 
 void someOtherFunction() {
 
-	// Simply hold the pin on/off:
-	bb.on(BUZZER); // turn on
-	bb.off(BUZZER); // turn off
+    // Simply hold the pin on/off:
+    bb.on(BUZZER); // turn on
+    bb.off(BUZZER); // turn off
 
-	// For non-async patterns, use the following:
-	bb.onoff(BUZZER, 200, 3, 100); // beep 3 times, 200ms on, 100ms off
-	// OR
-	bb.onoff(BUZZER, 200, 5); // beep 5x, 200ms on, 200ms off
-	// OR
-	bb.onoff(BUZZER, 200); // beep 1x, 200ms on
+    // For non-async patterns, use the following:
+    bb.onoff(BUZZER, 200, 3, 100); // beep 3 times, 200ms on, 100ms off
+    // OR
+    bb.onoff(BUZZER, 200, 5); // beep 5x, 200ms on, 200ms off
+    // OR
+    bb.onoff(BUZZER, 200); // beep 1x, 200ms on
 
-	// Everything below here is for async patterns only:
+    // Everything below here is for async patterns only:
 
-	bb.aonoff(BUZZER, 200, 3, 100); // beep 3 times, 200ms on, 100ms off
-	// OR
-	bb.aonoff(BUZZER, 200, 5); // beep 5x, 200ms on, 200ms off
-	// OR
-	bb.aonoff(BUZZER, 200); // beep 1x, 200ms on
+    bb.aonoff(BUZZER, 200, 3, 100); // beep 3 times, 200ms on, 100ms off
+    // OR
+    bb.aonoff(BUZZER, 200, 5); // beep 5x, 200ms on, 200ms off
+    // OR
+    bb.aonoff(BUZZER, 200); // beep 1x, 200ms on
 
-	// Can clear a pin's queue:
-	bb.clearQueue(BUZZER);
-	// or can tell it to clear at set itself to a specific state:
-	bb.clearQueue(BUZZER, HIGH); // clear and set to HIGH
+    // Can clear a pin's queue:
+    bb.clearQueue(BUZZER);
+    // or can tell it to clear at set itself to a specific state:
+    bb.clearQueue(BUZZER, HIGH); // clear and set to HIGH
 
-	// If you make another "aonoff" call before the current queue for that pin has finished,
-	// you can choose to append the new action to the end of the queue (default)
-	// or overwrite the current queue with the new pattern:
-	bb.aonoff(BUZZER, 200, 3, 100); // append to queue
-	bb.aonoff(BUZZER, 200, 3, 100, false); // overwrite queue
+    // If you make another "aonoff" call before the current queue for that pin has finished,
+    // you can choose to append the new action to the end of the queue (default)
+    // or overwrite the current queue with the new pattern:
+    bb.aonoff(BUZZER, 200, 3, 100); // append to queue
+    bb.aonoff(BUZZER, 200, 3, 100, false); // overwrite queue
 
-	// Finally, by specifying "0" for the number of times to repeat, the pattern will repeat indefinitely 
-	// or until a new pattern is set or the queue is cleared (also appendable or overwritable):
-	bb.aonoff(BUZZER, 200, 0); // beep indefinitely 200ms on, 200ms off
+    // Finally, by specifying "0" for the number of times to repeat, the pattern will repeat indefinitely 
+    // or until a new pattern is set or the queue is cleared (also appendable or overwritable):
+    bb.aonoff(BUZZER, 200, 0); // beep indefinitely 200ms on, 200ms off
 }
 ```
 
