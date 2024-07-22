@@ -9,11 +9,11 @@ Supports async patterns to prevent blocking `delay()` calls, if desired.
 ```c++
 #include <BlinkBuzz.h>
 
-const int BUZZER  = 33; // defined in the BlinkBuzz.h file for easy access across files
+const int BUZZER  = 33;       // defined in the BlinkBuzz.h file for easy access across files
 const int LED = LED_BUILTIN;  // defined in the BlinkBuzz.h file for easy access across files
 
 int allowedPins[] = { LED, BUZZER };
-BlinkBuzz bb(allowedPins, 2, true);// allowed pins, number of pins, allow usage of async patterns
+BlinkBuzz bb(allowedPins, 2, true); // allowed pins, number of pins, allow usage of async patterns
 
 void loop() {    // Must be called in the loop to update async pin states. Not required for non-async calls.
     bb.update(); // The more frequently this is called, the more accurate the timing will be.
@@ -22,23 +22,23 @@ void loop() {    // Must be called in the loop to update async pin states. Not r
 void someOtherFunction() {
 
     // Simply hold the pin on/off:
-    bb.on(BUZZER); // turn on
+    bb.on(BUZZER);  // turn on
     bb.off(BUZZER); // turn off
 
     // For non-async patterns, use the following:
     bb.onoff(BUZZER, 200, 3, 100); // beep 3 times, 200ms on, 100ms off
     // OR
-    bb.onoff(BUZZER, 200, 5); // beep 5x, 200ms on, 200ms off
+    bb.onoff(BUZZER, 200, 5);      // beep 5x, 200ms on, 200ms off
     // OR
-    bb.onoff(BUZZER, 200); // beep 1x, 200ms on
+    bb.onoff(BUZZER, 200);         // beep 1x, 200ms on
 
     // Everything below here is for async patterns only:
 
     bb.aonoff(BUZZER, 200, 3, 100); // beep 3 times, 200ms on, 100ms off
     // OR
-    bb.aonoff(BUZZER, 200, 5); // beep 5x, 200ms on, 200ms off
+    bb.aonoff(BUZZER, 200, 5);      // beep 5x, 200ms on, 200ms off
     // OR
-    bb.aonoff(BUZZER, 200); // beep 1x, 200ms on
+    bb.aonoff(BUZZER, 200);         // beep 1x, 200ms on
 
     // Can clear a pin's queue:
     bb.clearQueue(BUZZER);
@@ -48,7 +48,7 @@ void someOtherFunction() {
     // If you make another "aonoff" call before the current queue for that pin has finished,
     // you can choose to append the new action to the end of the queue (default)
     // or overwrite the current queue with the new pattern:
-    bb.aonoff(BUZZER, 200, 3, 100); // append to queue
+    bb.aonoff(BUZZER, 200, 3, 100);        // append to queue
     bb.aonoff(BUZZER, 200, 3, 100, false); // overwrite queue
 
     // Finally, by specifying "0" for the number of times to repeat, the pattern will repeat indefinitely 
