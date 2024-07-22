@@ -15,8 +15,8 @@ const int LED = LED_BUILTIN;  // defined in the BlinkBuzz.h file for easy access
 int allowedPins[] = { LED, BUZZER };
 BlinkBuzz bb(allowedPins, 2, true);// allowed pins, number of pins, allow usage of async patterns
 
-void loop() {
-	bb.update();
+void loop() {    // Must be called in the loop to update async pin states. Not required for non-async calls.
+	bb.update(); // The more frequently this is called, the more accurate the timing will be.
 }
 
 void someOtherFunction() {
