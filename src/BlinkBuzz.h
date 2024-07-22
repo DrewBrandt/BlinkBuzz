@@ -91,8 +91,9 @@ private:
 
 	bool isAllowed(int pin);
 	int getPinIndex(int pin);
-	void aonoffhelper(int pin, int timeStamp);
-	int calcTimeStamp(int pin, int pinIndex);
+	void indefhelper(int idx);
+	void aonoffhelper(int idx, int timeStamp);
+	int calcTimeStamp(int pinIndex);
 	bool enableAsync;
 
 	int queueSpacing = 100; // ms between each new action when you don't specify a # of repeats AND append a new action before the current one completes.
