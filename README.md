@@ -11,6 +11,8 @@ Supports async patterns to prevent blocking `delay()` calls, if desired.
 
 const int BUZZER  = 33;       // declared in the BlinkBuzz.h file for easy access across files (pin #)
 const int LED = LED_BUILTIN;  // declared in the BlinkBuzz.h file for easy access across files
+const int BUZZER  = 33;       // declared in the BlinkBuzz.h file for easy access across files (pin #)
+const int LED = LED_BUILTIN;  // declared in the BlinkBuzz.h file for easy access across files
 
 int allowedPins[] = { LED, BUZZER };
 BlinkBuzz bb(allowedPins, 2, true, 50); // allowed pins, number of pins, allow usage of async patterns, Max queue size per pin (async mode only)
@@ -18,6 +20,14 @@ BlinkBuzz bb(allowedPins, 2, true, 50); // allowed pins, number of pins, allow u
 
 void loop() {    // Must be called in the loop to update async pin states. Not required for non-async usage.
     bb.update(); // The more frequently this is called, the more accurate the timing will be.
+
+    // I recommend not using a delay() call for loop iterations when using async patterns.
+    // Instead, maybe try something like this:
+    double time = millis();
+    if(time - lastTime > DESIRED_INTERVAL) { // however much you would have otherwise delay()ed for
+        lastTime = time; // lastTime = global variable declared elsewhere
+        // the rest of your loop code here
+    }
 }
 
 void someOtherFunction() {
@@ -48,21 +58,21 @@ void someOtherFunction() {
 
     // There is also a pattern builder for more complex patterns:
     BBPattern pattern = BBPattern(ON_DURATION, REPEATS, OFF_DURATION);
-    //for example, to build an SOS pattern, build the S and O letters:
+    // For example, to build an SOS pattern, build the S and O letters:
     BBPattern s(50, 3, 200);
 	BBPattern o(500, 3, 200);
-    //then, append them to each other to build a single SOS pattern:
+    // Then, append them to each other to build a single SOS pattern:
     BBPattern sos = s.a(o).a(s);
-    //then call it
+    // Then call it
     bb.aonoff(BUZZER, sos);
 
-    //to repeat a pattern indefinitely, use the following:
+    // To repeat a pattern indefinitely, use the following:
     bb.aonoff(BUZZER, sos, true);
 
-    //you can also append a "rest" to the end of a pattern, changing it's final duration.
-    bb.aonoff(BUZZER, sos.r(1000), true); //rest for 1 second between the SOS patterns
+    // You can also append a "rest" to the end of a pattern, changing it's final duration.
+    bb.aonoff(BUZZER, sos.r(1000), true); // Rest for 1 second between the SOS patterns
 
-    //appending and adding rests can be done in any order as many times as you wish (so long as you have the queue space to hold them)
+    // Appending and adding rests can be done in any order as many times as you wish (so long as you have the queue space to hold them)
 }
 ```
 
