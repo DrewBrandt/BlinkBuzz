@@ -9,13 +9,14 @@ Supports async patterns to prevent blocking `delay()` calls, if desired.
 ```c++
 #include <BlinkBuzz.h>
 
-const int BUZZER  = 33;       // defined in the BlinkBuzz.h file for easy access across files
-const int LED = LED_BUILTIN;  // defined in the BlinkBuzz.h file for easy access across files
+const int BUZZER  = 33;       // declared in the BlinkBuzz.h file for easy access across files (pin #)
+const int LED = LED_BUILTIN;  // declared in the BlinkBuzz.h file for easy access across files
 
 int allowedPins[] = { LED, BUZZER };
-BlinkBuzz bb(allowedPins, 2, true); // allowed pins, number of pins, allow usage of async patterns
+BlinkBuzz bb(allowedPins, 2, true, 50); // allowed pins, number of pins, allow usage of async patterns, Max queue size per pin (async mode only)
+//NOTE: Max queue size refers to the number of on and off toggles that are performed, so ON -> OFF is 2 spots in the queue.
 
-void loop() {    // Must be called in the loop to update async pin states. Not required for non-async calls.
+void loop() {    // Must be called in the loop to update async pin states. Not required for non-async usage.
     bb.update(); // The more frequently this is called, the more accurate the timing will be.
 }
 
@@ -45,15 +46,23 @@ void someOtherFunction() {
     // or can tell it to clear at set itself to a specific state:
     bb.clearQueue(BUZZER, HIGH); // clear and set to HIGH
 
-    // If you make another "aonoff" call before the current queue for that pin has finished,
-    // you can choose to append the new action to the end of the queue (default)
-    // or overwrite the current queue with the new pattern:
-    bb.aonoff(BUZZER, 200, 3, 100);        // append to queue
-    bb.aonoff(BUZZER, 200, 3, 100, false); // overwrite queue
+    // There is also a pattern builder for more complex patterns:
+    BBPattern pattern = BBPattern(ON_DURATION, REPEATS, OFF_DURATION);
+    //for example, to build an SOS pattern, build the S and O letters:
+    BBPattern s(50, 3, 200);
+	BBPattern o(500, 3, 200);
+    //then, append them to each other to build a single SOS pattern:
+    BBPattern sos = s.a(o).a(s);
+    //then call it
+    bb.aonoff(BUZZER, sos);
 
-    // Finally, by specifying "0" for the number of times to repeat, the pattern will repeat indefinitely 
-    // or until a new pattern is set or the queue is cleared (also appendable or overwritable):
-    bb.aonoff(BUZZER, 200, 0); // beep indefinitely 200ms on, 200ms off
+    //to repeat a pattern indefinitely, use the following:
+    bb.aonoff(BUZZER, sos, true);
+
+    //you can also append a "rest" to the end of a pattern, changing it's final duration.
+    bb.aonoff(BUZZER, sos.r(1000), true); //rest for 1 second between the SOS patterns
+
+    //appending and adding rests can be done in any order as many times as you wish (so long as you have the queue space to hold them)
 }
 ```
 
@@ -68,10 +77,17 @@ Assuming you have the MinGW compiler installed.
 
 ## TODO
 
-- Add support for more complex patterns
-- Refactor internal queue management system
+- Document internal workings
 
 ## Changelog
+
+### 2.0.0
+
+- Added the BBPattern class to allow for more complex patterns to be built and displayed
+- Added the ability to repeat patterns indefinitely
+- Added the ability to append a rest to the end of a pattern
+- Removed the ability to append a pattern to the end of the queue, as it was redundant with the new BBPattern class. Now, calling `aonoff` with a new pattern will overwrite the current queue with the new pattern.
+
 
 ### 1.2.0
 
