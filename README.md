@@ -11,8 +11,6 @@ Supports async patterns to prevent blocking `delay()` calls, if desired.
 
 const int BUZZER  = 33;       // declared in the BlinkBuzz.h file for easy access across files (pin #)
 const int LED = LED_BUILTIN;  // declared in the BlinkBuzz.h file for easy access across files
-const int BUZZER  = 33;       // declared in the BlinkBuzz.h file for easy access across files (pin #)
-const int LED = LED_BUILTIN;  // declared in the BlinkBuzz.h file for easy access across files
 
 int allowedPins[] = { LED, BUZZER };
 BlinkBuzz bb(allowedPins, 2, true, 50); // allowed pins, number of pins, allow usage of async patterns, Max queue size per pin (async mode only)
@@ -62,7 +60,8 @@ void someOtherFunction() {
     BBPattern s(50, 3, 200);
 	BBPattern o(500, 3, 200);
     // Then, append them to each other to build a single SOS pattern:
-    BBPattern sos = s.a(o).a(s);
+    BBPattern sos;
+    sos.a(s).a(o).a(s);
     // Then call it
     bb.aonoff(BUZZER, sos);
 
@@ -81,7 +80,7 @@ The code should be set up to run on a Windows machine or Arduino, although it ha
 For use on Windows for testing, you can compile the example code with:
 
 ```powershell
-g++ examples/main.cpp src/BlinkBuzz.cpp -o BlinkBuzz
+g++ examples/main.cpp src/BlinkBuzz.cpp src/BBPattern.cpp -o BlinkBuzz
 ```
 Assuming you have the MinGW compiler installed.
 

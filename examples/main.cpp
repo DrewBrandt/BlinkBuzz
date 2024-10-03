@@ -25,15 +25,16 @@ void setup()
 	// test BBPattern
 	BBPattern s(50, 3, 200);
 	BBPattern o(500, 3, 200);
-	BBPattern sos = s.a(o).a(s);
+	BBPattern sos;
+	sos.a(s).a(o).a(s);
 
 	bb.aonoff(13, sos, true); // infinitely repeat the SOS pattern
 	// OR
-	bb.aonoff(13, s.a(o).a(s), true); // infinitely repeat the SOS pattern
+	//bb.aonoff(13, s.a(o).a(s), true); // infinitely repeat the SOS pattern
 	// OR
-	bb.aonoff(13, sos.r(1000), true); // infinitely repeat the SOS pattern, resting for 1 sec between repetitions
+	//bb.aonoff(13, sos.r(1000), true); // infinitely repeat the SOS pattern, resting for 1 sec between repetitions
 	// OR
-	bb.aonoff(13, s.r(1000).a(o).r(1000).a(s).r(1000), true); // infinitely repeat the SOS pattern, resting for 1 sec between letters
+	//bb.aonoff(13, s.r(1000).a(o).r(1000).a(s).r(1000), true); // infinitely repeat the SOS pattern, resting for 1 sec between letters
 }
 
 void loop()
