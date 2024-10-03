@@ -54,6 +54,8 @@ void someOtherFunction() {
     // or can tell it to clear at set itself to a specific state:
     bb.clearQueue(BUZZER, HIGH); // clear and set to HIGH
 
+    //------------------------------------------------------------------
+
     // There is also a pattern builder for more complex patterns:
     BBPattern pattern = BBPattern(ON_DURATION, REPEATS, OFF_DURATION);
     // For example, to build an SOS pattern, build the S and O letters:
@@ -62,6 +64,7 @@ void someOtherFunction() {
     // Then, append them to each other to build a single SOS pattern:
     BBPattern sos;
     sos.a(s).a(o).a(s);
+    //NOTE: do not do BBPattern sos = s.a(o).a(s); as this will not work as expected
     // Then call it
     bb.aonoff(BUZZER, sos);
 
@@ -71,7 +74,7 @@ void someOtherFunction() {
     // You can also append a "rest" to the end of a pattern, changing it's final duration.
     bb.aonoff(BUZZER, sos.r(1000), true); // Rest for 1 second between the SOS patterns
 
-    // Appending and adding rests can be done in any order as many times as you wish (so long as you have the queue space to hold them)
+    // Appending patterns and adding rests can be done in any order as many times as you wish (so long as you have the queue space to hold them)
 }
 ```
 
